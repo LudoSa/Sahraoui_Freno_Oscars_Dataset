@@ -10,8 +10,6 @@ object LauncherTest {
   case class Film(name : String, award : String, information : String, contentRating : String, company : String,
                   tomato : Tomato, releaseDate : String, originalReleaseDate : String, streamingReleaseDate : String){
 
-
-
   }
 
   case class Tomato(status : String, rating : String, count : String)
@@ -25,7 +23,12 @@ object LauncherTest {
 
     }
 
+    def LoadDataFromCSVForCopy(path : String): List[List[String]] = {
 
+      CSVReader.open(new File("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv")).toStream.toList.drop(0)
+
+
+    }
 
     def getFilms(value: Vector[String]): Film ={
 
@@ -55,7 +58,9 @@ object LauncherTest {
 
   case class ProcessingServices(){
 
-    val writer = CSVWriter.open(copyOriginalCSV("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv"))
+    val writer = CSVWriter.open("out.csv")
+
+    val l = new LoadFilmsFromCSV()
 
     def test() = {
 
@@ -63,15 +68,63 @@ object LauncherTest {
 
     }
 
-    def copyOriginalCSV(path : String): File ={
+    def showCopiedFile():Unit ={
 
-      val f = new File("out.csv")
+      val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSVForCopy("out.csv"))
 
-      val copy = f
+      println(filmsList.foreach(fields => println(fields)))
 
-      copy
+
     }
 
+    def copyOriginalCSV(data : List[List[String]]): Unit  ={
+
+      writer.writeAll(data);
+
+    }
+
+    def TomatoAudienceRating(): Unit ={
+
+
+
+    }
+
+
+    def AddTomatoAndAudienceCritic(): Unit ={
+
+
+
+    }
+
+    def CalculateYearsBetweenOriginalAndStreaming(): Unit ={
+
+
+
+    }
+
+
+    def AddMovieInfo(info : String, movie : String, films : List[Film]): Unit ={
+
+
+      val filmToAddInfo = films.filter(_.name.equals(movie))
+
+      val addInfo = Map(filmToAddInfo.lift(10) -> info)
+
+      println(filmToAddInfo)
+
+      //writer.writeRow(addInfo)
+
+
+      //val modifiedFilmsList = filmToAddInfo.map{case _. }
+
+
+    }
+
+    def AddContentRating(): Unit ={
+
+
+
+    }
 
   }
 
@@ -153,10 +206,13 @@ object LauncherTest {
 
 
     //Processing services
+    /*println("Copied file")
+    p.copyOriginalCSV(l.LoadDataFromCSV("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv"))
+    p.showCopiedFile()*/
 
     //PS 1
     println("PS1 5")
-    p.test()
+    p.AddMovieInfo("test", "Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
