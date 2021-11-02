@@ -70,7 +70,7 @@ object LauncherTest {
 
     //PS 4
     println("PS 4")
-
+    s.ModifyTomatoAudienceRating("Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 

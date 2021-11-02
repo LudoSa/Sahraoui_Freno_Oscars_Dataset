@@ -27,11 +27,12 @@ case class LoadFilmsFromCSV(){
     val contentRating = value(13)
     val company = value(19)
     val tomato = Tomato(value(20), value(21), value(22))
+    val audience = Audience(value(23), value(24), value(25))
     val releaseDate = value(5)
     val originalReleaseDate = value(17)
     val streamingReleaseDate = value(18)
 
-    Film(name, award, information, contentRating, company, tomato, releaseDate, originalReleaseDate, streamingReleaseDate)
+    Film(name, award, information, contentRating, company, tomato, audience, releaseDate, originalReleaseDate, streamingReleaseDate)
 
   }
 
