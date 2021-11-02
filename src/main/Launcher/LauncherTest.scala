@@ -1,7 +1,8 @@
 import com.github.tototoshi.csv.{CSVReader, CSVWriter}
-import scala.io.StdIn.readLine
+
 import java.io.File
 import java.util.Date
+import scala.io.StdIn.readLine
 
 
 
@@ -26,6 +27,7 @@ object LauncherTest {
     def LoadDataFromCSVForCopy(path : String): List[List[String]] = {
 
       CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(0)
+
 
 
     }
@@ -100,24 +102,34 @@ object LauncherTest {
 
 
 
-
     }
 
 
     def AddMovieInfo(info : String, movie : String, films : List[Film]): Unit ={
 
+      val test = films.filter(_.name.equals(movie))
 
-      val filmToAddInfo = films.filter(_.name.equals(movie))
+      //test(0).map(x => x.name).mkString(" ")
 
-      val addInfo = Map(filmToAddInfo.lift(10) -> info)
+      val f = Film(test(0).name, test(0).award, info,test(0).contentRating, test(0).company, test(0).tomato, test(0).releaseDate, test(0).originalReleaseDate, test(0).streamingReleaseDate)
 
-      println(filmToAddInfo)
+      //val updated = films.updated(0, f)
 
-      //writer.writeRow(addInfo)
+      //println(updated)
+
+      //println(test.map(x => x.name).mkString(" "))
+
+      films.filter(_.name.equals(movie)).patch(0, List(f), 1)
+
+      //println(films.filter(_.name.equals(movie)).patch(0, List(f), 1))
+
+      val t =  films.map(x => if(x.name == movie) f else x)
+      t.foreach(println)
 
 
-      //val modifiedFilmsList = filmToAddInfo.map{case _. }
+      //println(films.map(x => if(x.name == movie) films.filter(_.name.equals(movie)).patch(0, info, 1) else x))
 
+      //println(t(0))
 
     }
 
@@ -127,14 +139,15 @@ object LauncherTest {
 
       val currentContent = filmToAddContent(0).contentRating
 
-      val newContent = currentContent.patch(0, content, 0)
+      val newContent = currentContent.patch(0, content, 1)
+
 
 
       println(filmToAddContent)
       println(currentContent)
 
       println(newContent)
-      println(filmToAddContent)
+      //println(t)
 
 
 
@@ -143,17 +156,12 @@ object LauncherTest {
   }
 
 
-
   case class DataExplorationServices(){
 
-
     def AllFilmsOfAYear(films : List[Film])  = {
-
       print("Enter a year between 1927 and 2021 : ")
       val year = readLine()
-
       val filmsByYear = films.filter(_.releaseDate.equals(year)).map(x => x.name)
-
       if(filmsByYear.nonEmpty){
         filmsByYear
       }
@@ -161,16 +169,11 @@ object LauncherTest {
         println(s"No film found for year $year")
       }
 
-
     }
-
     def AllFilmsTitleContainsWord(films : List[Film])  = {
-
       print("Search a film's title that contain this word : ")
       val word = readLine()
-
       val filmsWithWord =  films.filter(_.name.contains(word)).map(x => x.name)
-
 
       if(filmsWithWord.nonEmpty){
         filmsWithWord
@@ -178,22 +181,14 @@ object LauncherTest {
       else{
         println(s"No film's title contains the word $filmsWithWord")
       }
-
     }
-
     def AllWinnerFilms(films : List[Film]) : List[String] = {
-
       films.filter(_.award.equals("Winner")).map(x => x.name)
-
     }
-
     def AllFilmsOfACompany(films : List[Film])  = {
-
       print("Search a all the film of a company : ")
       val company = readLine()
-
       val filmsByCompany =  films.filter(_.name.contains(company)).map(x => x.name)
-
 
       if(filmsByCompany.nonEmpty){
         filmsByCompany
@@ -201,15 +196,10 @@ object LauncherTest {
       else{
         println(s"No film's found for the company $company")
       }
-
     }
-
     def AllCertifiedFreshFilms(films : List[Film]) : List[String] = {
-
       films.filter(_.tomato.status.equals("Certified-Fresh")).map(x => x.name)
-
     }
-
   }
 
 
@@ -221,7 +211,7 @@ object LauncherTest {
 
     val p = new ProcessingServices()
 
-    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("src\\main\\data\\OscarsDataset.csv"))
+    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv"))
 
     //Queries
 
@@ -257,13 +247,13 @@ object LauncherTest {
     p.showCopiedFile()*/
 
     //PS 1
-    println("PS1 5")
-    //p.AddMovieInfo("test", "Wings", filmsList)
+    println("PS1")
+    p.AddMovieInfo("test", "The Broadway Melody", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
     println("PS2")
-    p.AddContentRating("PG-13", "The Racket", filmsList)
+    //p.AddContentRating("PG-13", "The Racket", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
