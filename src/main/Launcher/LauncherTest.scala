@@ -1,5 +1,5 @@
 import com.github.tototoshi.csv.{CSVReader, CSVWriter}
-
+import scala.io.StdIn.readLine
 import java.io.File
 import java.util.Date
 
@@ -18,14 +18,14 @@ object LauncherTest {
 
     def LoadDataFromCSV(path : String): List[List[String]] = {
 
-      CSVReader.open(new File("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv")).toStream.toList.drop(1)
+      CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(1)
 
 
     }
 
     def LoadDataFromCSVForCopy(path : String): List[List[String]] = {
 
-      CSVReader.open(new File("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv")).toStream.toList.drop(0)
+      CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(0)
 
 
     }
@@ -100,6 +100,7 @@ object LauncherTest {
 
 
 
+
     }
 
 
@@ -129,18 +130,41 @@ object LauncherTest {
   }
 
 
+
   case class DataExplorationServices(){
 
 
-    def AllFilmsOfAYear(year : String, films : List[Film]) : List[String] = {
+    def AllFilmsOfAYear(films : List[Film])  = {
 
-      films.filter(_.releaseDate.equals(year)).map(x => x.name)
+      print("Enter a year between 1927 and 2021 : ")
+      val year = readLine()
+
+      val filmsByYear = films.filter(_.releaseDate.equals(year)).map(x => x.name)
+
+      if(filmsByYear.nonEmpty){
+        filmsByYear
+      }
+      else{
+        println(s"No film found for year $year")
+      }
+
 
     }
 
-    def AllFilmsTitleContainsWord(word : String, films : List[Film]) : List[String] = {
+    def AllFilmsTitleContainsWord(films : List[Film])  = {
 
-      films.filter(_.name.contains(word)).map(x => x.name)
+      print("Search a film's title that contain this word : ")
+      val word = readLine()
+
+      val filmsWithWord =  films.filter(_.name.contains(word)).map(x => x.name)
+
+
+      if(filmsWithWord.nonEmpty){
+        filmsWithWord
+      }
+      else{
+        println(s"No film's title contains the word $filmsWithWord")
+      }
 
     }
 
@@ -148,13 +172,22 @@ object LauncherTest {
 
       films.filter(_.award.equals("Winner")).map(x => x.name)
 
-
     }
 
-    def AllFilmsOfACompany(company : String, films : List[Film]) : List[String] = {
+    def AllFilmsOfACompany(films : List[Film])  = {
 
-      films.filter(_.company.equals(company)).map(x => x.name)
+      print("Search a all the film of a company : ")
+      val company = readLine()
 
+      val filmsByCompany =  films.filter(_.name.contains(company)).map(x => x.name)
+
+
+      if(filmsByCompany.nonEmpty){
+        filmsByCompany
+      }
+      else{
+        println(s"No film's found for the company $company")
+      }
 
     }
 
@@ -175,19 +208,19 @@ object LauncherTest {
 
     val p = new ProcessingServices()
 
-    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv"))
+    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("src\\main\\data\\OscarsDataset.csv"))
 
     //Queries
 
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
-    println(d.AllFilmsOfAYear("1927", filmsList))
+    println(d.AllFilmsOfAYear(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
     println("Query 2")
-    println(d.AllFilmsTitleContainsWord("The", filmsList))
+    println(d.AllFilmsTitleContainsWord(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
     //Query 3
     println("Query 3")
@@ -196,7 +229,7 @@ object LauncherTest {
 
     //Query 4
     println("Query 4")
-    println(d.AllFilmsOfACompany("Warner Bros.", filmsList))
+    println(d.AllFilmsOfACompany(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
