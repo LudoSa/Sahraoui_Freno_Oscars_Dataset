@@ -1,7 +1,10 @@
-import com.github.tototoshi.csv.{CSVReader, CSVWriter}
+
 
 import java.io.{File, FileNotFoundException, IOException}
 import java.util.Date
+
+import com.github.tototoshi.csv.{CSVReader, CSVWriter}
+
 import scala.io.StdIn.readLine
 import scala.util.{Failure, Success}
 
@@ -22,11 +25,9 @@ object LauncherTest {
 
     def LoadDataFromCSV(path : String): List[List[String]] = {
 
-      CSVReader.open(new File("C:\\Users\\Gab\\Desktop\\Scala\\Projet\\OscarsDataset.csv")).toStream.toList.drop(1)
-
+      CSVReader.open(new File("C:\\Users\\Gaby\\Desktop\\Scala\\OscarsDataset.csv")).toStream.toList.drop(1)
 
     }
-
 
 
     def getFilms(value: Vector[String]): Film ={
@@ -57,7 +58,7 @@ object LauncherTest {
 
   case class ProcessingServices(){
 
-    val writer = CSVWriter.open(copyOriginalCSV("C:\\Users\\Gab\\Desktop\\Scala\\Projet\\OscarsDataset.csv"))
+    val writer = CSVWriter.open(copyOriginalCSV("C:\\Users\\Gaby\\Desktop\\Scala\\OscarsDataset.csv"))
 
     def test() = {
 
@@ -88,7 +89,7 @@ object LauncherTest {
 
       val filmsByYear = films.filter(_.releaseDate.equals(year)).map(x => x.name)
 
-      if(filmsByYear.length > 0){
+      if(filmsByYear.nonEmpty){
         filmsByYear
       }
       else{
@@ -106,14 +107,12 @@ object LauncherTest {
       val filmsWithWord =  films.filter(_.name.contains(word)).map(x => x.name)
 
 
-      if(filmsWithWord.length > 0){
+      if(filmsWithWord.nonEmpty){
         filmsWithWord
       }
       else{
         println(s"No film's title contains the word $filmsWithWord")
       }
-
-
 
     }
 
@@ -127,11 +126,11 @@ object LauncherTest {
 
       print("Search a all the film of a company : ")
       val company = readLine()
-1945
+
       val filmsByCompany =  films.filter(_.name.contains(company)).map(x => x.name)
 
 
-      if(filmsByCompany.length > 0){
+      if(filmsByCompany.nonEmpty){
         filmsByCompany
       }
       else{
@@ -157,7 +156,7 @@ object LauncherTest {
 
     val p = new ProcessingServices()
 
-    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("C:\\Users\\Gab\\Desktop\\Scala\\Projet\\OscarsDataset.csv"))
+    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("C:\\Users\\Gaby\\Desktop\\Scala\\OscarsDataset.csv"))
 
     try {
       //Queries
