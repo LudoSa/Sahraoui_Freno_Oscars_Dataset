@@ -1,7 +1,10 @@
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import scala.io.StdIn.readLine
 
 trait DataExplorationServices{
 
+  /*
   def AllFilmsOfAYear(films : List[Film])  = {
     print("Enter a year between 1927 and 2021 : ")
     val year = readLine()
@@ -13,7 +16,46 @@ trait DataExplorationServices{
       println(s"No film found for year $year")
     }
 
+  }*/
+  
+  def OriginalStreamingDateDiff(films: List[Film]) ={
+
+
+    println("Calculate the difference between original and streaming date of the film : (e.g : Wings)")
+
+    val filmName = readLine()
+
+    val filmsToUse =  films.filter(_.name.equals(filmName))
+
+    val originalDate = LocalDate.parse(filmsToUse(0).originalReleaseDate)
+
+    val streamingDate = LocalDate.parse(filmsToUse(0).streamingReleaseDate)
+
+
+
+
+    if(filmsToUse.nonEmpty){
+      if(originalDate.equals("") || streamingDate.equals("")){
+        println("No difference available. Missing data")
+      }
+      else {
+
+        val daysDiff = ChronoUnit.DAYS.between(originalDate, streamingDate)
+        val monthsDiff = ChronoUnit.MONTHS.between(originalDate, streamingDate)
+        val yearsDiff = ChronoUnit.YEARS.between(originalDate, streamingDate)
+
+        println(s"Difference between the dates : $daysDiff DAYS | $monthsDiff MONTHS | $yearsDiff YEARS")
+      }
+
+    }
+    else{
+      println(s"No film's found with title $filmName")
+    }
+
+
   }
+
+
   def AllFilmsTitleContainsWord(films : List[Film])  = {
     print("Search a film's title that contain this word : ")
     val word = readLine()
@@ -26,9 +68,13 @@ trait DataExplorationServices{
       println(s"No film's title contains the word $filmsWithWord")
     }
   }
+
+
   def AllWinnerFilms(films : List[Film]) : List[String] = {
     films.filter(_.award.equals("Winner")).map(x => x.name)
   }
+
+
   def AllFilmsOfACompany(films : List[Film])  = {
     print("Search a all the film of a company : ")
     val company = readLine()

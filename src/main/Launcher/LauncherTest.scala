@@ -13,13 +13,9 @@ object LauncherTest {
 
   def main(args: Array[String]): Unit = {
 
-    //val d = new DataExplorationServices()
+    val l = LoadFilmsFromCSV()
 
-    val l = new LoadFilmsFromCSV()
-
-    //val p = new ProcessingServices()
-
-    val s = new Services()
+    val s = Services()
 
     val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("src\\main\\data\\OscarsDataset.csv"))
 
@@ -30,6 +26,7 @@ object LauncherTest {
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
     //println(s.AllFilmsOfAYear(filmsList))
+      s.OriginalStreamingDateDiff(filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
@@ -52,7 +49,7 @@ object LauncherTest {
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
-    println("Query 5")                                                                                                  
+    println("Query 5")
     println(s.AverageRating(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
