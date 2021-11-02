@@ -20,8 +20,6 @@ object LauncherTest {
 
       CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(1)
 
-      println("OK")
-
 
     }
 
@@ -123,7 +121,20 @@ object LauncherTest {
 
     }
 
-    def AddContentRating(): Unit ={
+    def AddContentRating(content : String, movie : String, films : List[Film]): Unit ={
+
+      val filmToAddContent = films.filter(_.name.equals(movie))
+
+      val currentContent = filmToAddContent(0).contentRating
+
+      val newContent = currentContent.patch(0, content, 0)
+
+
+      println(filmToAddContent)
+      println(currentContent)
+
+      println(newContent)
+      println(filmToAddContent)
 
 
 
@@ -217,26 +228,26 @@ object LauncherTest {
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
-    println(d.AllFilmsOfAYear(filmsList))
+    //println(d.AllFilmsOfAYear(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
     println("Query 2")
-    println(d.AllFilmsTitleContainsWord(filmsList))
+    //println(d.AllFilmsTitleContainsWord(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
     //Query 3
     println("Query 3")
-    println(d.AllWinnerFilms(filmsList))
+    //println(d.AllWinnerFilms(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 4
     println("Query 4")
-    println(d.AllFilmsOfACompany(filmsList))
+    //println(d.AllFilmsOfACompany(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
     println("Query 5")
-    println(d.AllCertifiedFreshFilms(filmsList))
+    //println(d.AllCertifiedFreshFilms(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
@@ -247,10 +258,13 @@ object LauncherTest {
 
     //PS 1
     println("PS1 5")
-    p.AddMovieInfo("test", "Wings", filmsList)
+    //p.AddMovieInfo("test", "Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
+    println("PS2")
+    p.AddContentRating("PG-13", "The Racket", filmsList)
+    println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 3
