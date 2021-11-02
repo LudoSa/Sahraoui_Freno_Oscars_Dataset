@@ -3,6 +3,8 @@ import com.github.tototoshi.csv.{CSVReader, CSVWriter}
 import java.io.File
 import java.util.Date
 import scala.io.StdIn.readLine
+import java.io.{File, FileNotFoundException, IOException}
+import java.util.Date
 
 
 
@@ -19,8 +21,9 @@ object LauncherTest {
 
     val s = new Services()
 
-    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("C:\\Users\\ludov\\IdeaProjects\\OscarsDataset.csv"))
+    val filmsList = l.getFilmsFromCSV(l.LoadDataFromCSV("src\\main\\data\\OscarsDataset.csv"))
 
+    try {
     //Queries
 
     //Query 1
@@ -64,22 +67,30 @@ object LauncherTest {
 
     //PS 3
     println("PS 3")
-
+     s.AddTomatoAndAudienceCritic("The Racket", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 4
     println("PS 4")
-    s.ModifyTomatoAudienceRating("Wings", filmsList)
+    //s.ModifyTomatoAudienceRating("Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 5
     println("PS 5")
-    s.ModifyTomatoAndAudienceCritic("Wings", filmsList)
+    //s.ModifyTomatoAndAudienceCritic("Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
+  } catch {
+    case ex: FileNotFoundException => {
+      println("File not found")
+    }
+    case ex: IOException => {
+      println("IO Exception")
+    }
+  }
   }
 
 
