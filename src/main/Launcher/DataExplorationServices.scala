@@ -44,4 +44,36 @@ trait DataExplorationServices{
   def AllCertifiedFreshFilms(films : List[Film]) : List[String] = {
     films.filter(_.tomato.status.equals("Certified-Fresh")).map(x => x.name)
   }
+
+  def AverageRating(films : List[Film])  = {
+    println("Calculate the average rating of the film : (e.g : Wings)")
+
+    val filmName = readLine()
+
+    val filmsToCalculate =  films.filter(_.name.equals(filmName))
+
+    val tomatoRating = filmsToCalculate(0).tomato.rating
+
+    val audienceRating = filmsToCalculate(0).audience.rating
+
+
+    if(filmsToCalculate.nonEmpty){
+      if(tomatoRating.equals("") || audienceRating.equals("")){
+        println("No average available. Missing data")
+      }
+      else {
+        val average = (tomatoRating.toDouble + audienceRating.toDouble) / 2
+        println(average)
+      }
+
+    }
+    else{
+      println(s"No film's found with title $filmName")
+    }
+
+
+
+
+
+  }
 }

@@ -51,6 +51,12 @@ object LauncherTest {
     //println(s.AllCertifiedFreshFilms(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
+    //Query 5
+    println("Query 5")                                                                                                  
+    println(s.AverageRating(filmsList))
+    println("-------------------------------------------------------------------------------------------------------")
+
+
 
     //Processing services
 
@@ -67,7 +73,7 @@ object LauncherTest {
 
     //PS 3
     println("PS 3")
-     s.AddTomatoAndAudienceCritic("The Racket", filmsList)
+    //s.AddTomatoAndAudienceCritic("The Racket", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
