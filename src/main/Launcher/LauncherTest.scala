@@ -20,6 +20,8 @@ object LauncherTest {
 
       CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(1)
 
+      println("OK")
+
 
     }
 
