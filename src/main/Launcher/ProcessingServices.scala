@@ -86,23 +86,30 @@ trait ProcessingServices{
 
   def AddMovieInfo(movie : String, films : List[Film]): List[Film] ={
 
-    val filmTest = films.filter(_.name.equals(movie))
+    try{
+      val FilmList = films.filter(_.name.equals(movie))
 
 
-    println("Add information to a film :")
+      println("Add information to a film :")
 
-   println("Enter the tomatometer count : ")
+      println("Enter movie info : ")
 
-    //user input
-    val info : String = readLine()
+      //user input
+      val info : String = readLine()
 
 
-    val f = Film(filmTest(0).name, filmTest(0).award, info,filmTest(0).contentRating, filmTest(0).company, filmTest(0).imdb,filmTest(0).tomato, filmTest(0).audience, filmTest(0).releaseDate, filmTest(0).originalReleaseDate, filmTest(0).streamingReleaseDate)
+      val f = Film(FilmList(0).name, FilmList(0).award, info,FilmList(0).contentRating, FilmList(0).company, FilmList(0).imdb,FilmList(0).tomato, FilmList(0).audience, FilmList(0).releaseDate, FilmList(0).originalReleaseDate, FilmList(0).streamingReleaseDate)
 
-    //Modified list with the modify film only if no info
-    val t =  films.map(x => if(x.name == movie && x.information.isEmpty) f else x)
+      //Modified list with the modify film only if no info
+      val t =  films.map(x => if(x.name == movie && x.information.isEmpty) f else x)
 
-    t
+      t
+    }
+    catch{
+      case ex: IndexOutOfBoundsException => println("Invalid name")
+        films
+    }
+
 
   }
 

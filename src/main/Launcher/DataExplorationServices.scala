@@ -18,32 +18,38 @@ trait DataExplorationServices{
 
     println("Calculate the difference between original and streaming date of the film : (e.g : Wings)")
 
-    val filmName = readLine()
+    try{
+      val filmName = readLine()
 
-    val filmsToUse =  films.filter(_.name.equals(filmName))
+      val filmsToUse =  films.filter(_.name.equals(filmName))
 
-    val originalDate = LocalDate.parse(filmsToUse(0).originalReleaseDate)
+      val originalDate = LocalDate.parse(filmsToUse(0).originalReleaseDate)
 
-    val streamingDate = LocalDate.parse(filmsToUse(0).streamingReleaseDate)
+      val streamingDate = LocalDate.parse(filmsToUse(0).streamingReleaseDate)
 
 
-    if(filmsToUse.nonEmpty){
-      if(originalDate.equals("") || streamingDate.equals("")){
-        println("No difference available. Missing data")
+      if(filmsToUse.nonEmpty){
+        if(originalDate.equals("") || streamingDate.equals("")){
+          println("No difference available. Missing data")
+        }
+        else {
+
+          val daysDiff = ChronoUnit.DAYS.between(originalDate, streamingDate)
+          val monthsDiff = ChronoUnit.MONTHS.between(originalDate, streamingDate)
+          val yearsDiff = ChronoUnit.YEARS.between(originalDate, streamingDate)
+
+          println(s"Difference between the dates : $daysDiff DAYS | $monthsDiff MONTHS | $yearsDiff YEARS")
+        }
+
       }
-      else {
-
-        val daysDiff = ChronoUnit.DAYS.between(originalDate, streamingDate)
-        val monthsDiff = ChronoUnit.MONTHS.between(originalDate, streamingDate)
-        val yearsDiff = ChronoUnit.YEARS.between(originalDate, streamingDate)
-
-        println(s"Difference between the dates : $daysDiff DAYS | $monthsDiff MONTHS | $yearsDiff YEARS")
+      else{
+        println(s"No film's found with title $filmName")
       }
+    }
+    catch{
+      case ex: IndexOutOfBoundsException => println("Invalid name")
+    }
 
-    }
-    else{
-      println(s"No film's found with title $filmName")
-    }
 
 
   }
@@ -91,29 +97,35 @@ trait DataExplorationServices{
     //User Input
     println("Calculate the average rating of the film : (e.g : Wings)")
 
-    val filmName = readLine()
+    try{
+      val filmName = readLine()
 
-    val filmsToCalculate =  films.filter(_.name.equals(filmName))
+      val filmsToCalculate =  films.filter(_.name.equals(filmName))
 
-    val tomatoRating = filmsToCalculate(0).tomato.rating
+      val tomatoRating = filmsToCalculate(0).tomato.rating
 
-    val audienceRating = filmsToCalculate(0).audience.rating
+      val audienceRating = filmsToCalculate(0).audience.rating
 
 
-    //Test if there is data
-    if(filmsToCalculate.nonEmpty){
-      if(tomatoRating.equals("") || audienceRating.equals("")){
-        println("No average available. Missing data")
+      //Test if there is data
+      if(filmsToCalculate.nonEmpty){
+        if(tomatoRating.equals("") || audienceRating.equals("")){
+          println("No average available. Missing data")
+        }
+        else {
+          val average = (tomatoRating.toDouble + audienceRating.toDouble) / 2
+          println(average)
+        }
+
       }
-      else {
-        val average = (tomatoRating.toDouble + audienceRating.toDouble) / 2
-        println(average)
+      else{
+        println(s"No film's found with title $filmName")
       }
+    }
+    catch {
+      case ex: IndexOutOfBoundsException => println("Invalid Name")
+    }
 
-    }
-    else{
-      println(s"No film's found with title $filmName")
-    }
 
 
 
