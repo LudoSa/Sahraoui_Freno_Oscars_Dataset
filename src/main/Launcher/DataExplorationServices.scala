@@ -4,20 +4,17 @@ import scala.io.StdIn.readLine
 
 trait DataExplorationServices{
 
-  /*
-  def AllFilmsOfAYear(films : List[Film])  = {
-    print("Enter a year between 1927 and 2021 : ")
-    val year = readLine()
-    val filmsByYear = films.filter(_.releaseDate.equals(year)).map(x => x.name)
-    if(filmsByYear.nonEmpty){
-      filmsByYear
-    }
-    else{
-      println(s"No film found for year $year")
-    }
 
-  }*/
-  
+
+  def displayFilm(film : List[Film]) ={
+
+    film.foreach(println)
+
+
+  }
+
+
+
   def OriginalStreamingDateDiff(films: List[Film]) ={
 
 
@@ -89,10 +86,6 @@ trait DataExplorationServices{
     }
   }
 
-  //Find all the film that are "Certified Fresh"
-  def AllCertifiedFreshFilms(films : List[Film]) : List[String] = {
-    films.filter(_.tomato.status.equals("Certified-Fresh")).map(x => x.name)
-  }
 
   //Calculate the average of tomato rating and audiance rating
   def AverageRating(films : List[Film])  = {

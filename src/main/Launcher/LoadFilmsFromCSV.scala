@@ -4,23 +4,18 @@ import java.io.File
 
 case class LoadFilmsFromCSV(){
 
+  //Load all films with CSV Reader
   def LoadDataFromCSV(path : String): List[List[String]] = {
 
-    CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(1)
+    CSVReader.open(new File(path)).toStream.toList.drop(1)
 
 
   }
 
-  def LoadDataFromCSVForCopy(path : String): List[List[String]] = {
-
-    CSVReader.open(new File("src\\main\\data\\OscarsDataset.csv")).toStream.toList.drop(0)
-
-
-
-  }
-
+  //Transform all lines into a film
   def getFilms(value: Vector[String]): Film ={
 
+    //Each file value is put in a variable
     val name = value(1)
     val award = value(4)
     val information = value(10)
@@ -28,16 +23,20 @@ case class LoadFilmsFromCSV(){
     val company = value(19)
     val tomato = Tomato(value(20), value(21), value(22))
     val audience = Audience(value(23), value(24), value(25))
+    val imdb = IMDB(value(8), value(9))
     val releaseDate = value(5)
     val originalReleaseDate = value(17)
     val streamingReleaseDate = value(18)
 
-    Film(name, award, information, contentRating, company, tomato, audience, releaseDate, originalReleaseDate, streamingReleaseDate)
+    //We return the film
+    Film(name, award, information, contentRating, company,imdb, tomato, audience, releaseDate, originalReleaseDate, streamingReleaseDate)
 
   }
 
-  def getFilmsFromCSV(filmsOfReader: List[List[String]]): List[Film] = {
-    filmsOfReader.map(row => {
+
+  //Create a row per film of the file
+  def getFilmsFromCSV(filmsReader: List[List[String]]): List[Film] = {
+    filmsReader.map(row => {
 
       getFilms(row.toVector)
 

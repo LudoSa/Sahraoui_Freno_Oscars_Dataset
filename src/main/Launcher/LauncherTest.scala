@@ -22,11 +22,11 @@ object LauncherTest {
     try {
     //Queries
 
+/*
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
     println(s.OriginalStreamingDateDiff(filmsList))
-    s.OriginalStreamingDateDiff(filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
@@ -44,10 +44,6 @@ object LauncherTest {
     println(s.AllFilmsOfACompany(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
-    //Query 5
-    println("Query 5")
-    println(s.AllCertifiedFreshFilms(filmsList))
-    println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
     println("Query 5")
@@ -55,35 +51,35 @@ object LauncherTest {
     println("-------------------------------------------------------------------------------------------------------")
 
 
-
+*/
     //Processing services
 
     //PS 1
     println("PS 1")
-    s.ModifyMovieInfo("test", "Wings", filmsList)
+      s.displayFilm(s.AddMovieInfo("test", "7th Heaven", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
     println("PS 2")
-
+      s.displayFilm(s.ModifyIMDBRatingAndCount("Wings", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 3
     println("PS 3")
-    s.AddTomatoAndAudienceCritic("The Racket", filmsList)
+      s.displayFilm(s.AddTomatoAndAudienceCritic("The Racket", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 4
     println("PS 4")
-    s.ModifyTomatoAudienceRating("Wings", filmsList)
+      s.displayFilm(s.ModifyTomatoAudienceRating("Wings", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 5
     println("PS 5")
-    //s.ModifyTomatoAndAudienceCritic("Wings", filmsList)
+      s.displayFilm(s.ModifyTomatoAndAudienceCritic("Wings", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
