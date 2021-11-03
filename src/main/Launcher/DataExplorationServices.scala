@@ -32,8 +32,6 @@ trait DataExplorationServices{
     val streamingDate = LocalDate.parse(filmsToUse(0).streamingReleaseDate)
 
 
-
-
     if(filmsToUse.nonEmpty){
       if(originalDate.equals("") || streamingDate.equals("")){
         println("No difference available. Missing data")
@@ -55,9 +53,11 @@ trait DataExplorationServices{
 
   }
 
-
+  //find a film that contains a word
   def AllFilmsTitleContainsWord(films : List[Film])  = {
-    print("Search a film's title that contain this word : ")
+
+
+    println("Search a film's title that contain this word : (e.g : Love, The)")
     val word = readLine()
     val filmsWithWord =  films.filter(_.name.contains(word)).map(x => x.name)
 
@@ -70,15 +70,16 @@ trait DataExplorationServices{
   }
 
 
+  //Find all the winner
   def AllWinnerFilms(films : List[Film]) : List[String] = {
     films.filter(_.award.equals("Winner")).map(x => x.name)
   }
 
-
+  //Find all the film of a company
   def AllFilmsOfACompany(films : List[Film])  = {
-    print("Search a all the film of a company : ")
+    print("Search a all the film of a company : (e.g : Fox)")
     val company = readLine()
-    val filmsByCompany =  films.filter(_.name.contains(company)).map(x => x.name)
+    val filmsByCompany =  films.filter(_.company.contains(company)).map(x => x.name)
 
     if(filmsByCompany.nonEmpty){
       filmsByCompany
@@ -87,11 +88,16 @@ trait DataExplorationServices{
       println(s"No film's found for the company $company")
     }
   }
+
+  //Find all the film that are "Certified Fresh"
   def AllCertifiedFreshFilms(films : List[Film]) : List[String] = {
     films.filter(_.tomato.status.equals("Certified-Fresh")).map(x => x.name)
   }
 
+  //Calculate the average of tomato rating and audiance rating
   def AverageRating(films : List[Film])  = {
+
+    //User Input
     println("Calculate the average rating of the film : (e.g : Wings)")
 
     val filmName = readLine()
@@ -103,6 +109,7 @@ trait DataExplorationServices{
     val audienceRating = filmsToCalculate(0).audience.rating
 
 
+    //Test if there is data
     if(filmsToCalculate.nonEmpty){
       if(tomatoRating.equals("") || audienceRating.equals("")){
         println("No average available. Missing data")

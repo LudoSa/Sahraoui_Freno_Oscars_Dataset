@@ -25,27 +25,28 @@ object LauncherTest {
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
-    //println(s.AllFilmsOfAYear(filmsList))
-      s.OriginalStreamingDateDiff(filmsList)
+    println(s.OriginalStreamingDateDiff(filmsList))
+    s.OriginalStreamingDateDiff(filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
     println("Query 2")
-    //println(s.AllFilmsTitleContainsWord(filmsList))
+    println(s.AllFilmsTitleContainsWord(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
     //Query 3
     println("Query 3")
-    //println(s.AllWinnerFilms(filmsList))
+    println("All the films that won an Oscar :")
+    println(s.AllWinnerFilms(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 4
     println("Query 4")
-    //println(s.AllFilmsOfACompany(filmsList))
+    println(s.AllFilmsOfACompany(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
     println("Query 5")
-    //println(s.AllCertifiedFreshFilms(filmsList))
+    println(s.AllCertifiedFreshFilms(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 5
@@ -59,7 +60,7 @@ object LauncherTest {
 
     //PS 1
     println("PS 1")
-    //s.ModifyMovieInfo("test", "Wings", filmsList)
+    s.ModifyMovieInfo("test", "Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
@@ -70,13 +71,13 @@ object LauncherTest {
 
     //PS 3
     println("PS 3")
-    //s.AddTomatoAndAudienceCritic("The Racket", filmsList)
+    s.AddTomatoAndAudienceCritic("The Racket", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 
     //PS 4
     println("PS 4")
-    //s.ModifyTomatoAudienceRating("Wings", filmsList)
+    s.ModifyTomatoAudienceRating("Wings", filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
 

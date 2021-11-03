@@ -28,8 +28,6 @@ trait ProcessingServices{
   }
 
 
-
-
   def ModifyMovieInfo(info : String, movie : String, films : List[Film]): List[Film] ={
 
     val test = films.filter(_.name.equals(movie))
@@ -49,6 +47,7 @@ trait ProcessingServices{
 
   }
 
+  //Modify the content rating of a film
   def ModifyContentRating(content : String, movie : String, films : List[Film]): List[Film] ={
     val test = films.filter(_.name.equals(movie))
     val f = Film(test(0).name, test(0).award, test(0).information,content, test(0).company, test(0).tomato, test(0).audience, test(0).releaseDate, test(0).originalReleaseDate, test(0).streamingReleaseDate)
@@ -59,18 +58,22 @@ trait ProcessingServices{
     t
   }
 
+  //Add a Tomatomer critic and an audiance critic
   def AddTomatoAndAudienceCritic(movie : String, films : List[Film]): Unit = {
 
+    println("Add Audiance and Tomato critic :")
     val test = films.filter(_.name.equals(movie))
 
     println("Enter the tomatometer count : ")
 
+    //user input
     val countInput : String = readLine()
 
     println("Enter the tomatometer rating : ")
 
     val ratingInput : String = readLine()
 
+    //Tomato status is defined by the tomato rating
     def userInput() ={
       ratingInput.toInt match{
         case x if x > 75 => "Certified-Fresh"
@@ -81,7 +84,10 @@ trait ProcessingServices{
 
     val tomato = Tomato(userInput(), ratingInput, countInput)
 
+    //modify the film
     val f = Film(test(0).name, test(0).award, test(0).information,test(0).contentRating, test(0).company, tomato, test(0).audience, test(0).releaseDate, test(0).originalReleaseDate, test(0).streamingReleaseDate)
+
+    //display only film name
     val t =  films.map(x => if(x.name == movie) f else x)
 
     t.foreach(println)
@@ -94,6 +100,7 @@ trait ProcessingServices{
     val rating = scala.util.Random
     val r = rating.nextInt(100)
 
+    //Tomato status is defined by the tomato rating
     def userInput()={
       r match{
         case x if x > 75 => "Certified-Fresh"
@@ -105,6 +112,8 @@ trait ProcessingServices{
     val tomato = Tomato(userInput(), r.toString, count.toString)
 
     val f = Film(test(0).name, test(0).award, test(0).information,test(0).contentRating, test(0).company, tomato, test(0).audience, test(0).releaseDate, test(0).originalReleaseDate, test(0).streamingReleaseDate)
+
+    //display only film name
     val t =  films.map(x => if(x.name == movie) f else x)
 
     t.foreach(println)
