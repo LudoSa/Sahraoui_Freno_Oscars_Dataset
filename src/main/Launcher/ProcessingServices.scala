@@ -31,9 +31,16 @@ trait ProcessingServices{
   }
 
 
-  def AddMovieInfo(info : String, movie : String, films : List[Film]): List[Film] ={
+  def AddMovieInfo(movie : String, films : List[Film]): List[Film] ={
 
     val test = films.filter(_.name.equals(movie))
+
+    println("Add information to a film :")
+
+    println("Enter the tomatometer count : ")
+
+    //user input
+    val info : String = readLine()
 
 
     val f = Film(test(0).name, test(0).award, info,test(0).contentRating, test(0).company, test(0).imdb,test(0).tomato, test(0).audience, test(0).releaseDate, test(0).originalReleaseDate, test(0).streamingReleaseDate)
@@ -57,10 +64,10 @@ trait ProcessingServices{
     t
   }
 
-  //Add a Tomatomer critic and an audiance critic
-  def AddTomatoAndAudienceCritic(movie : String, films : List[Film]): List[Film] = {
+  //Add a Tomatomer critic
+  def AddTomatoCritic(movie : String, films : List[Film]): List[Film] = {
 
-    println("Add Audiance and Tomato critic :")
+    println("Add Tomato critic :")
     val test = films.filter(_.name.equals(movie))
 
     println("Enter the tomatometer count : ")

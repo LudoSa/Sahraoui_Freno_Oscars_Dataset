@@ -22,7 +22,7 @@ object LauncherTest {
     try {
     //Queries
 
-/*
+
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
@@ -51,12 +51,12 @@ object LauncherTest {
     println("-------------------------------------------------------------------------------------------------------")
 
 
-*/
+
     //Processing services
 
     //PS 1
     println("PS 1")
-      s.displayFilm(s.AddMovieInfo("test", "7th Heaven", filmsList))
+      s.displayFilm(s.AddMovieInfo("7th Heaven", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
     //PS 2
@@ -67,7 +67,7 @@ object LauncherTest {
 
     //PS 3
     println("PS 3")
-      s.displayFilm(s.AddTomatoAndAudienceCritic("The Racket", filmsList))
+      s.displayFilm(s.AddTomatoCritic("The Racket", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
 
