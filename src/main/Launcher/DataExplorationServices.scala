@@ -13,8 +13,6 @@ trait DataExplorationServices{
 
   }
 
-
-
   def OriginalStreamingDateDiff(films: List[Film]) ={
 
 

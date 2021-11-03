@@ -22,11 +22,11 @@ object LauncherTest {
     try {
     //Queries
 
-
     //Query 1
     println("-------------------------------------------------------------------------------------------------------")
     println("Query 1")
     println(s.OriginalStreamingDateDiff(filmsList))
+    s.OriginalStreamingDateDiff(filmsList)
     println("-------------------------------------------------------------------------------------------------------")
 
     //Query 2
@@ -43,7 +43,6 @@ object LauncherTest {
     println("Query 4")
     println(s.AllFilmsOfACompany(filmsList))
     println("-------------------------------------------------------------------------------------------------------")
-
 
     //Query 5
     println("Query 5")
@@ -79,10 +78,13 @@ object LauncherTest {
 
     //PS 5
     println("PS 5")
-      s.displayFilm(s.ModifyTomatoAndAudienceCritic("Wings", filmsList))
+    s.displayFilm(s.ModifyTomatoAndAudienceCritic("Wings", filmsList))
     println("-------------------------------------------------------------------------------------------------------")
 
-
+    //PS 5
+    println("PS 5")
+    s.AddVoteCount("Wings", "The Broadway Melody", filmsList)
+    println("-------------------------------------------------------------------------------------------------------")
   } catch {
     case ex: FileNotFoundException => {
       println("File not found")
